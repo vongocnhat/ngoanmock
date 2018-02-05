@@ -5,9 +5,10 @@
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="vendor/fontawesome/css/fontawesome-all.min.css">
 	<link rel="stylesheet" type="text/css" href="vendor/datatables/css/dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="css/dialog.css">
 	<link rel="stylesheet" type="text/css" href="css/common.css">
 </head>
-<body>
+<body style="width: 100%">
 <div class="top">
 top
 </div>
@@ -30,13 +31,15 @@ top
 				</form>
 				<h3 class="text-white table-title">Header table</h3>
 			</div>
-			<table class="table table-bordered" id="nTable" cellspacing="0" >
+			<table class="table table-bordered nTable" cellspacing="0" >
 				<thead class="text-white">
 					<tr>
 						<th>Col 1</th>
 						<th>Col 2</th>
 						<th>Col 3</th>
 						<th>Col 4</th>
+						<th>Edit</th>
+						<th>Delete</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,22 +48,28 @@ top
 						<td>Noi dung 2</td>
 						<td>Noi dung 3</td>
 						<td>Noi dung 4</td>
+						<th><a href="#"><i class="fas fa-edit"></i></a></th>
+						<th><a href="#" class="btn-delete-record"><i class="fas fa-trash-alt"></i></a></th>
 					</tr>
 					<tr>
 						<td>Noi dung 5</td>
 						<td>Noi dung 6</td>
 						<td>Noi dung 7</td>
 						<td>Noi dung 8</td>
+						<th><a href="#"><i class="fas fa-edit"></i></a></th>
+						<th><a href="#" class="btn-delete-record"><i class="fas fa-trash-alt"></i></a></th>
 					</tr>
 					<tr>
 						<td>Noi dung 5</td>
 						<td>Noi dung 6</td>
 						<td>Noi dung 7</td>
 						<td>Noi dung 8</td>
+						<th><a href="#"><i class="fas fa-edit"></i></a></th>
+						<th><a href="#" class="btn-delete-record"><i class="fas fa-trash-alt"></i></a></th>
 					</tr>
 				</tbody>
 			</table>
-			<button id="btn-add-new-record">Add New Record</button>
+			<button class="btn-add-new-record">Add New Record</button>
 		</div>
 	</div>
 </div>
@@ -70,12 +79,12 @@ top
 <!-- add news account -->
 <div class="dark-background">
 </div>
-<div id="box-add-new-record">
+<div class="box-add-new-record box-dialog">
 	<div class="box-dialog-header">
-		<h3 class="text-white padding-15">Add New Record</h3>
-		<button id="btn-close" class="btn btn-danger float-right">X</button>
+		<span class="text-white dialog-title">Add New Record</span>
+		<button class="btn-cancel btn btn-danger float-right">X</button>
 	</div>
-	<form class="padding-15">
+	<form>
 		<div class="form-group">
 	    <label>Email address</label>
 	    <input type="Email" class="form-control" placeholder="Enter email">
@@ -89,36 +98,71 @@ top
 	    <input type="text" class="form-control" placeholder="Enter address">
 	  </div>
 	  <div class="float-right">
-		  <button class="btn btn-info padding-15 rounded-0" id="btn-cancel">Cancel</button>
-		  <input type="submit" name="" value="Save" class="btn btn-info padding-15 rounded-0">
+		  <button class="btn btn-danger padding-15 rounded-0 btn-cancel">Cancel</button>
+		  <input type="submit" name="" value="Save" class="btn btn-success padding-15 rounded-0">
 		</div>
 	</form>
 </div>
 <!-- /add news account  -->
+<!-- delete confirm -->
+<div class="box-delete-confirm box-dialog">
+	<div class="box-dialog-header">
+		<span class="text-white dialog-title">Are you sure</span>
+		<button class="btn-cancel btn btn-danger float-right">X</button>
+	</div>
+	<h3>This record will be delete. Are you sure?</h3>
+	<div class="float-right">
+		<button class="btn btn-danger padding-15 rounded-0 btn-cancel">Cancel</button>
+	  <button class="btn btn-success padding-15 rounded-0 text-white">Delete</button>
+	</div>
+</div>
+<!-- /delete confirm -->
+<!--  box error-->
+<div class="box-error box-dialog">
+	<div class="box-dialog-header">
+		<span class="text-white dialog-title">Error</span>
+		<button class="btn-cancel btn btn-danger float-right">X</button>
+	</div>
+	<h3>Lỗi Định Mệnh</h3>
+	<div class="d-flex justify-content-center">
+		<button class="btn btn-danger padding-15 rounded-0 btn-cancel">OK</button>
+	</div>
+</div>
+<!-- /box error-->
 <script src="vendor/js/jquery-3.3.1.min.js" type="text/javascript"></script>
 <script src="vendor/bootstrap/js/tether.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="vendor/datatables/js/dataTables.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  $('#nTable').DataTable();
-  $("#box-add-new-record").click(function(event) {
+  $('.nTable').DataTable();
+  $(".box-add-new-record, .box-delete-confirm").click(function(event) {
   	//ngăn chặn việc khi click vào box-add-new-record, click sẽ được truyền sang body thì form sẽ bị đóng
   	event.stopPropagation();
   });
   //mở form khi click vào btn-add-new-record
-  $("#btn-add-new-record").click(function(event) {
+  $(".btn-add-new-record").click(function(event) {
   	//ngăn chặn việc khi click vào nút btn-add-new-record, click sẽ được truyền sang body thì form sẽ bị đóng
   	event.stopPropagation();
   	$(".dark-background").show();
-    $("#box-add-new-record" ).show();
+    $(".box-add-new-record" ).show();
   });
-  //đóng form và background đen khi click vào btn-close
   //đóng form và background đen khi click vào btn-cancel
   //đóng form và background đen khi click vào body
-  $("#btn-close, #btn-cancel, body").click(function() {
-    $("#box-add-new-record" ).hide();
+  //đóng delete confirm và background đen khi click vào body
+  $(".btn-cancel, body, .btn-delete-record, .box-error").click(function() {
+    $(".box-add-new-record" ).hide();
+    $(".box-delete-confirm").hide();
     $(".dark-background").hide();
+    $('.box-error').hide();
+  });
+
+  $(".btn-delete-record").click(function(e) {
+  	//tắt chuyển đến trang có href
+  	e.preventDefault();
+  	e.stopPropagation();
+  	$(".box-delete-confirm").show();
+  	$(".dark-background" ).show();
   });
 });
 </script>
