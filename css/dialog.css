@@ -26,6 +26,7 @@
 .box-dialog-header .btn-cancel {
 	border-radius: 0;
 	position: absolute;
+	width: 38px;
 	top: 0;
 	right: 0;
 }

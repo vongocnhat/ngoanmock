@@ -2,16 +2,12 @@
 	height: 50px;
 	background-color: red;
 }
-.content {
-
-}
 .padding-15 {
 	padding-left: 15px;
 	padding-right: 15px;
 }
 .menu {
 	background-color: #343a40;
-	height: 500px;
 	width: 250px;
 }
 .menu ul {
@@ -20,7 +16,6 @@
 	padding-left: 15px;
 }
 .box-content {
-	height: 500px;
 	width: calc(100% - 250px);
 	padding-left: 50px;
 	margin-top: 15px;
