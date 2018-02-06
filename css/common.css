@@ -51,3 +51,27 @@
 .box-error {
 	width: 500px;
 }
+.box-add-new-record .form-group {
+	position: relative;
+}
+/*tooltip*/
+.arrow-down {
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid #eb4444;
+	position: absolute;
+	bottom: -9px;
+	left: 30px;
+}
+.tooltipbody {
+	transform: translate(0 , calc(-100% - 10px));
+	width: 200px;
+	background-color: #eb4444;
+	color: #fff;
+	padding: 5px;
+	font-size: 13px;
+	line-height: 18px;
+	position: absolute;
+	right: 30px;
+}
+/*/tooltip*/
